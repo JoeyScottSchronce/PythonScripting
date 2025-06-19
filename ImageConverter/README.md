@@ -21,9 +21,10 @@ A Python application built with Tkinter and TkinterDnD2 that converts PNG and JP
 - time (standard library, included with Python)
 
 ## Installation
-1. Fork the repository:Fork this repository on GitHub to create your own copy for customization or contribution.
+1. Fork this repository on GitHub to create your own copy for customization or contribution.
 
-2. Install the required packages:Open a terminal and run:
+2. Install the required packages: <br>
+Open a terminal and run:
 ```
 pip install Pillow tkinterdnd2 pyinstaller
 ```
