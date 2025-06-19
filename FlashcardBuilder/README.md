@@ -46,7 +46,7 @@ pyinstaller --onefile flashcard_builder.py
 
 2. Create a shortcut on your desktop to run the software. Your "Target" will resemble this filepath:  
 ```
-"C:\Program Files\Python37\pythonw.exe" "C:\Users\<Username>\<path to saved file>\dist\flashcard_builder.exe"
+C:\Program Files\Python37\pythonw.exe "C:\Users\<Username>\<path to saved file>\dist\flashcard_builder.exe"
 ```
 
 This will create a standalone executable without a console window. Change the icon and other details to suit your needs.
