@@ -20,7 +20,8 @@ A Python application built with Tkinter that generates flashcards using the Gemi
 Fork the repository:
 1. Fork this repository on GitHub to create your own copy for customization or contribution.
 
-2. Install the required packages:Open a terminal and run:
+2. Install the required packages: <br>
+Open a terminal and run:
 ```
 pip install requests genanki python-dotenv pyinstaller
 ```
