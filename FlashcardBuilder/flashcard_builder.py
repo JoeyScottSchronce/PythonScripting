@@ -93,7 +93,7 @@ class FlashcardApp:
         # Label with centered text
         tk.Label(
             inner_frame,  # Use local inner_frame, not self.inner_frame
-            text="Generate a comprehensive list of quiz questions about...",
+            text="Generate a comprehensive list of flashcards about...",
             fg='#E0E0E0',
             bg='#2E2E2E',
             font=("Arial", 12),
@@ -165,8 +165,10 @@ class FlashcardApp:
             headers = {"Content-Type": "application/json"}
             data = {
                 "contents": [{"parts": [{
-                    "text": "Generate a comprehensive list of quiz questions about " + input_text +
+                    "text": "Generate a comprehensive list of flashcards about " + input_text +
                             ". Return the pair in this format: 'question|answer;question|answer;...'. "
+                            "Do not precede each question with the word question. "
+                            "Do not precede each answer with the word answer. "
                             "Do not provide any additional content to the response."}]}],
                 "generationConfig": {
                     "response_mime_type": "text/plain"
