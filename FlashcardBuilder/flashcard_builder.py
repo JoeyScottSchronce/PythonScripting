@@ -17,7 +17,7 @@ def create_anki_deck(title, flashcards):
     model_id = random.randrange(1 << 30, 1 << 31)
     model = genanki.Model(
         model_id,
-        'Basic',
+        f'{title}',
         fields=[
             {'name': 'Front'},
             {'name': 'Back'}
@@ -26,15 +26,11 @@ def create_anki_deck(title, flashcards):
             {
                 'name': 'Card 1',
                 'qfmt': '{{Front}}',
-                'afmt': '{{Back}}',
+                'afmt': '{{FrontSide}}<hr id=answer>{{Back}}',
             }
         ],
-        css='''
-            .card {
-                text-align: center;
-                font-size: 1.2rem;
-            }
-        '''
+        css='''.card {font-family: ariel;font-size: 20px;text-align: center;color: black;background-color:white;}'''
+
     )
     deck_id = random.randrange(1 << 30, 1 << 31)
     deck = genanki.Deck(deck_id, title)
