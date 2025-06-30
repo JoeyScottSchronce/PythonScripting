@@ -125,6 +125,9 @@ class FlashcardApp:
             justify="center"  # Ensures the text is centered (default for single-line)
         ).pack(pady=10)
 
+        # Bind Enter key to submit_to_api
+        self.root.bind('<Return>', lambda event: self.submit_to_api())
+
     def show_loading(self):
         # Clear main frame content
         for widget in self.main_frame.winfo_children():
