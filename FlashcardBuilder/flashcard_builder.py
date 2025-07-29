@@ -47,10 +47,10 @@ def create_anki_deck(title, flashcards):
 # Parse response text into flashcards (CSV format: question|answer;question|answer;...)
 def parse_response_text(text):
     flashcards = []
-    pairs = text.strip().split(';')
+    pairs = text.strip().split(';;;')
     for pair in pairs:
-        if '|' in pair:
-            question, answer = pair.split('|', 1)
+        if '|||' in pair:
+            question, answer = pair.split('|||', 1)
             flashcards.append({"question": question.strip(), "answer": answer.strip()})
     return flashcards
 
@@ -165,7 +165,7 @@ class FlashcardApp:
             data = {
                 "contents": [{"parts": [{
                     "text": "Generate a comprehensive list of flashcards about " + input_text +
-                            ". Return the pair in this format: 'question|answer;question|answer;...'. "
+                            ". Return the pair in this format: 'question|||answer;;;question|||answer;;;question|||answer;;;...'. "
                             "Do not precede each question with the word question. "
                             "Do not precede each answer with the word answer. "
                             "Do not provide any additional content to the response."}]}],
