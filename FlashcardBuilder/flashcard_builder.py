@@ -160,12 +160,13 @@ class FlashcardApp:
                 self.root.after(0, self.handle_api_error, "Gemini API key not found in .env file.")
                 return
 
-            url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent"
+            url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
             headers = {"Content-Type": "application/json"}
             data = {
                 "contents": [{"parts": [{
                     "text": "Generate a comprehensive list of flashcards about " + input_text +
-                            ". Return the pair in this format: 'question|||answer;;;question|||answer;;;question|||answer;;;...'. "
+                            ". Return the pair in this format: question|||answer;;;question|||answer;;;question|||answer;;;..."
+                            "All answers should be brief and rememberable. "
                             "Do not precede each question with the word question. "
                             "Do not precede each answer with the word answer. "
                             "Do not provide any additional content to the response."}]}],
