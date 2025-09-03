@@ -164,16 +164,18 @@ class FlashcardApp:
             headers = {"Content-Type": "application/json"}
             data = {
                 "contents": [{"parts": [{
-                    "text": "Generate a comprehensive list of flashcards about " + input_text +
-                            ". Return the pair in this format: question|||answer;;;question|||answer;;;question|||answer;;;..."
+                    "text": "You are a flashcard generator. Format output strictly as specified. "
+                            "Generate a comprehensive list of flashcards about " + input_text +
+                            ". Return the question and answer pair in this format: "
+                            "question|||answer;;;question|||answer;;;question|||answer;;;... "
                             "All answers should be brief and rememberable. "
-                            "Do not precede each question with the word question. "
-                            "Do not precede each answer with the word answer. "
+                            "Do not label questions or answers. "
                             "Do not provide any additional content to the response."}]}],
                 "generationConfig": {
                     "response_mime_type": "text/plain"
                 }
             }
+
             response = requests.post(f"{url}?key={api_key}", headers=headers, json=data)
             response.raise_for_status()
 
