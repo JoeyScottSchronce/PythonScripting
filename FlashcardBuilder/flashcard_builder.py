@@ -160,7 +160,7 @@ class FlashcardApp:
                 self.root.after(0, self.handle_api_error, "Gemini API key not found in .env file.")
                 return
 
-            url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent"
+            url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent"
             headers = {"Content-Type": "application/json"}
             data = {
                 "contents": [{"parts": [{
