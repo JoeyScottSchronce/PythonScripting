@@ -168,6 +168,7 @@ class FlashcardApp:
                             "Generate a comprehensive list of flashcards about " + input_text +
                             ". Return the question and answer pair in this format: "
                             "question|||answer;;;question|||answer;;;question|||answer;;;... "
+                            "Use simple, clear language and avoid complex terms when possible. "
                             "All answers should be brief and rememberable. "
                             "Do not label questions or answers. "
                             "Do not provide any additional content to the response."}]}],
