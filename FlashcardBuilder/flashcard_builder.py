@@ -153,6 +153,8 @@ class FlashcardApp:
             self.loading_label = None
         self.loading_index = 0  # Reset index for next loading
 
+    # TODO: update "input text" to safely handle user inputing "" and other special characters. 
+
     def run_api_request(self, input_text):
         try:
             api_key = os.getenv("GEMINI_API_KEY")
@@ -165,8 +167,8 @@ class FlashcardApp:
             data = {
                 "contents": [{"parts": [{
                     "text": "You are a flashcard generator. Format output strictly as specified. "
-                            "Generate a comprehensive list of flashcards about " + input_text +
-                            ". Return the question and answer pair in this format: "
+                            "Generate a comprehensive list of flashcards about" + input_text + ". "
+                            "Return the question and answer pair in this format: "
                             "question|||answer;;;question|||answer;;;question|||answer;;;... "
                             "Use simple, clear language and avoid complex terms when possible. "
                             "All answers should be brief and rememberable. "
@@ -299,6 +301,8 @@ class FlashcardApp:
 
     def _on_mousewheel(self, event):
         self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+
+    # TODO: handle FileNotFound Error properly when user enters an invalid deck name.
 
     def create_deck(self):
         title = self.title_entry.get() or "Untitled Deck"
