@@ -89,7 +89,7 @@ class FlashcardApp:
         # Label with centered text
         tk.Label(
             inner_frame,  # Use local inner_frame, not self.inner_frame
-            text="Generate a comprehensive list of flashcards about...",
+            text="Generate a list of Go programming flashcards about...",
             fg='#E0E0E0',
             bg='#2E2E2E',
             font=("Arial", 12),
@@ -153,8 +153,6 @@ class FlashcardApp:
             self.loading_label = None
         self.loading_index = 0  # Reset index for next loading
 
-    # TODO: update "input text" to safely handle user inputing "" and other special characters. 
-
     def run_api_request(self, input_text):
         try:
             api_key = os.getenv("GEMINI_API_KEY")
@@ -166,14 +164,22 @@ class FlashcardApp:
             headers = {"Content-Type": "application/json"}
             data = {
                 "contents": [{"parts": [{
-                    "text": "You are a flashcard generator. Format output strictly as specified. "
-                            "Generate a comprehensive list of flashcards about" + input_text + ". "
-                            "Return the question and answer pair in this format: "
-                            "question|||answer;;;question|||answer;;;question|||answer;;;... "
-                            "Use simple, clear language and avoid complex terms when possible. "
-                            "All answers should be brief and rememberable. "
-                            "Do not label questions or answers. "
-                            "Do not provide any additional content to the response."}]}],
+                    "text": "You are a flashcard generator with the soul purpose of teaching Go programming. "
+                            "All the flashcard content should be generated based on current and official Go documentation. "
+
+                            "FIRST PRIORITY: Always format the response output strictly and exactly in this "
+                            "question and answer format:question|||answer;;;question|||answer;;;question|||answer;;;... "
+
+                            "Always use simple, clear language and avoid complex terms and definitions. "
+                            "Always cover the topic completely and generate as many flashcards as possible. "
+                            "All questions must start with 'How do I' for a realistic memory recall. "
+                            "All answers must be extremely brief and rememberable. "
+
+                            "Do not label the questions or answers in the response. "
+                            "Do not include HTML in the response. "
+
+                            "REQUEST: Generate a verbose and comprehensive list of flashcards about" + input_text + "."
+                            }]}],
                 "generationConfig": {
                     "response_mime_type": "text/plain"
                 }
