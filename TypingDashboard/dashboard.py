@@ -30,7 +30,7 @@ class TypingDashboard(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("BEAKL 15 Dashboard")
-        self.geometry("980x420")
+        self.geometry("980x440")
         self.configure(bg="#f0f0f0")
 
         self.caps_lock = False
