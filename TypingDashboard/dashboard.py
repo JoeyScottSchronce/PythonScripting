@@ -16,12 +16,14 @@ KEY_ROWS = [
     ['Tab', 'q', 'h', 'o', 'u', 'x', 'g', 'c', 'r', 'f', 'z', '[', ']', '\\'],
     ['Caps', 'y', 'i', 'e', 'a', '/', 'd', 's', 't', 'n', 'b', ";", 'Enter'],
     ['Shift', 'j', ',', '.', 'k', '"', 'w', 'm', 'l', 'p', 'v', 'Shift'],
-    ['Ctrl', 'Win', 'Alt', 'Space', 'Alt', 'Win', 'Menu', 'Ctrl']
+    ['', '', '', 'Space', '', '', '']
 ]
 
 # Keys to color specially on-screen (BEAKL main row focus - 'yieastnb')
 BEAKL_HIGHLIGHT_KEYS = {k.lower() for k in list('yieastnb')}
 BEAKL_HIGHLIGHT_BG = "#d2d2d2"  # light grey
+# Default font for on-screen keys (larger for readability)
+KEY_FONT = (None, 14)
 
 
 class TypingDashboard(tk.Tk):
@@ -30,7 +32,7 @@ class TypingDashboard(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("BEAKL 15 Dashboard")
-        self.geometry("980x440")
+        self.geometry("1000x490")
         self.configure(bg="#f0f0f0")
 
         self.caps_lock = False
@@ -41,7 +43,7 @@ class TypingDashboard(tk.Tk):
 
         # Top area: label and text box
         top_frame = tk.Frame(self, bg=self['bg'])
-        top_frame.pack(side=tk.TOP, fill=tk.X, padx=10, pady=(10, 4))
+        top_frame.pack(side=tk.TOP, fill=tk.X, padx=170, pady=(10, 4))
 
         label = tk.Label(top_frame, text="Begin typing:", bg=self['bg'], font=(None, 11))
         label.pack(anchor='w')
@@ -50,7 +52,7 @@ class TypingDashboard(tk.Tk):
         # and allow a focus highlight so the caret and focused state are obvious.
         self.text = tk.Text(
             top_frame,
-            height=5,
+            height=3,
             wrap='word',
             font=(None, 18),
             insertbackground='#000000',
@@ -65,7 +67,7 @@ class TypingDashboard(tk.Tk):
         self.text.bind('<1>', lambda e: self.text.focus_set())
 
         # Keyboard area
-        kb_frame = tk.Frame(self, bg="#d9d9d9", padx=150, pady=8)
+        kb_frame = tk.Frame(self, bg="#d9d9d9", padx=34, pady=8)
         kb_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=(4, 12))
 
         self.key_buttons = {}
@@ -77,9 +79,15 @@ class TypingDashboard(tk.Tk):
             for c, key in enumerate(row):
                 # color BEAKL-specific keys with a light-blue background
                 bg = BEAKL_HIGHLIGHT_BG if key.lower() in BEAKL_HIGHLIGHT_KEYS else None
-                btn = tk.Button(row_frame, text=key.upper() if len(key) == 1 else key,
-                                width=self._key_width(key), height=2,
-                                relief='raised', bg=bg)
+                btn = tk.Button(
+                    row_frame,
+                    text=key.lower() if len(key) == 1 else key,
+                    font=KEY_FONT,
+                    width=self._key_width(key),
+                    height=2,
+                    relief='raised',
+                    bg=bg,
+                )
 
                 btn.pack(side=tk.LEFT, padx=3)
                 btn.bind('<Button-1>', partial(self._on_button_click, key))
@@ -116,10 +124,10 @@ class TypingDashboard(tk.Tk):
     def _key_width(self, key: str) -> int:
         """Return a reasonable width for a key based on its label."""
         match key:
-            case k if len(k) == 1:
-                return 4
+            case "\\":
+                return 7
             case "Space":
-                return 35
+                return 32
             case "Enter" | "Backspace":
                 return 11
             case "Tab":
@@ -127,9 +135,11 @@ class TypingDashboard(tk.Tk):
             case "Caps":
                 return 10
             case "Shift":
-                return 14
+                return 13
+            case k if len(k) == 1:
+                return 4
             case _:
-                return 6
+                return 7
 
     def _on_button_click(self, key_label, _event):
         """Handle clicks on the on-screen key buttons."""
