@@ -89,7 +89,7 @@ class FlashcardApp:
         # Label with centered text
         tk.Label(
             inner_frame,  # Use local inner_frame, not self.inner_frame
-            text="Generate a list of Go programming flashcards about...",
+            text="Generate a list of flashcards about...",
             fg='#E0E0E0',
             bg='#2E2E2E',
             font=("Arial", 12),
@@ -164,23 +164,30 @@ class FlashcardApp:
             headers = {"Content-Type": "application/json"}
             data = {
                 "contents": [{"parts": [{
-                    "text": "You are a flashcard generator with the soul purpose of teaching Go programming. "
-                            "All the flashcard content should be generated based on current and official Go documentation. "
+                    "text": "ROLE: You are a flashcard generator. All the flashcard content should be "
+                    "generated based on current and official information. "
 
-                            "FIRST PRIORITY: Always format the response output strictly and exactly in this "
-                            "question and answer format:question|||answer;;;question|||answer;;;question|||answer;;;... "
+                    "RESPONSE FORMAT: question|||answer;;;question|||answer;;;question|||answer;;;..."
 
-                            "Always use simple, clear language and avoid complex terms and definitions. "
-                            "Always cover the topic completely and generate as many flashcards as possible. "
-                            "All questions must start with 'How do I' for a realistic memory recall. "
-                            "All answers must be extremely brief and rememberable. "
+                    "EXAMPLES: Where is Rome?|||Italy;;;What package would I use for formatted"
+                    " I/O?|||fmt;;;How do I call the police?|||Dial 911;;;When is "
+                    "Christmas?|||December 25th;;;Who is Jesus?|||The son of God;;;Why is the sky "
+                    "blue?|||Rayleigh scattering"
+                    
+                    "REQUIREMENTS: Always format the response output strictly and exactly. "
+                    "Always use simple, clear language and avoid complex terms and definitions. "
+                    "Always cover the topic completely and generate as many flashcards as possible. "
 
-                            "Do not label the questions or answers in the response. "
-                            "Do not include HTML in the response. "
+                    "All questions must sound like I am asking the question to someone"
+                    "All answers must be extremely brief and rememberable. "
+                    "If the request is about programming, the preferred progamming language is always Golang. "
 
-                            "REQUEST: Generate a verbose and comprehensive list of flashcards about" + input_text + "."
-                            }]}],
-                "generationConfig": {
+                    "Do not label the questions or answers in the response. "
+                    "Do not include HTML in the response. "
+
+                    "REQUEST: Generate a verbose and comprehensive list of flashcards about " + input_text + "?"
+                    }]}],
+                    "generationConfig": {
                     "response_mime_type": "text/plain"
                 }
             }
