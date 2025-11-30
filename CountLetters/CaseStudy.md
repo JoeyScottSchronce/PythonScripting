@@ -1,0 +1,32 @@
+
+# Case Study Results
+
+- When comparing the top 1000 most used english words according to ```https://www.ef.edu/english-resources/english-vocabulary/top-1000-words/```, the results of this case study of letter usage in the english alphabet are as follows:
+
+#### Letter : Count (Frequency)
+* E: 747 (13.38%)
+* T: 443 (7.94%)
+* R: 430 (7.70%)
+* A: 429 (7.69%)
+* O: 400 (7.17%)
+* I: 391 (7.01%)
+* N: 362 (6.49%)
+* S: 317 (5.68%)
+* L: 282 (5.05%)
+* C: 243 (4.35%)
+* H: 183 (3.28%)
+* D: 182 (3.26%)
+* U: 180 (3.23%)
+* M: 159 (2.85%)
+* P: 159 (2.85%)
+* G: 129 (2.31%)
+* Y: 119 (2.13%)
+* F: 111 (1.99%)
+* W: 89 (1.59%)
+* B: 76 (1.36%)
+* V: 74 (1.33%)
+* K: 43 (0.77%)
+* X: 14 (0.25%)
+* J: 8 (0.14%)
+* Z: 6 (0.11%)
+* Q: 5 (0.09%)

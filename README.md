@@ -7,3 +7,4 @@ This repository consists of a number of scripts made in Python to handle and aut
 * AI Flashcard Builder for AnkiDroid
 * Image Converter (any to .webp)
 * BEAKL 15 Typing Dashboard GUI
+* Letter Counter (by count and percentage)
