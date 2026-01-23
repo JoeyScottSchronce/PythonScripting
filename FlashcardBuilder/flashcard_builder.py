@@ -44,14 +44,19 @@ def create_anki_deck(title, flashcards):
     genanki.Package(deck).write_to_file(output_path)
     return output_path
 
-# Parse response text into flashcards (CSV format: question|answer;question|answer;...)
+# Parse response text into flashcards (JSON format)
 def parse_response_text(text):
     flashcards = []
-    pairs = text.strip().split(';;;')
-    for pair in pairs:
-        if '|||' in pair:
-            question, answer = pair.split('|||', 1)
-            flashcards.append({"question": question.strip(), "answer": answer.strip()})
+    try:
+        data = json.loads(text)
+        # Handle both array and object with flashcards key
+        if isinstance(data, list):
+            flashcards = data
+        elif isinstance(data, dict) and 'flashcards' in data:
+            flashcards = data['flashcards']
+    except json.JSONDecodeError:
+        # Fallback: return empty list if JSON parsing fails
+        pass
     return flashcards
 
 # Main Application
@@ -167,28 +172,24 @@ class FlashcardApp:
                     "text": "ROLE: You are a flashcard generator. All the flashcard content should be "
                     "generated based on current and official information. "
 
-                    "RESPONSE FORMAT: question|||answer;;;question|||answer;;;question|||answer;;;..."
-
-                    "EXAMPLES: Where is Rome?|||Italy;;;What package would I use for formatted"
-                    " I/O?|||fmt;;;How do I call the police?|||Dial 911;;;When is "
-                    "Christmas?|||December 25th;;;Who is Jesus?|||The son of God;;;Why is the sky "
-                    "blue?|||Rayleigh scattering"
+                    "RESPONSE FORMAT: Return a valid JSON array of objects with 'question' and 'answer' keys. "
+                    "Example: [{\"question\": \"Where is Rome?\", \"answer\": \"Italy\"}, {\"question\": \"What is 2+2?\", \"answer\": \"4\"}]"
                     
-                    "REQUIREMENTS: Always format the response output strictly and exactly. "
+                    "REQUIREMENTS: Always format the response output as valid JSON. "
                     "Always use simple, clear language and avoid complex terms and definitions. "
                     "Always cover the topic completely and generate as many flashcards as possible. "
 
-                    "All questions must sound like I am asking the question to someone"
+                    "All questions must sound like I am asking the question to someone. "
                     "All answers must be extremely brief and rememberable. "
-                    "If the request is about programming, the preferred progamming language is always Golang. "
+                    "If the request is about programming, the preferred programming language is always Golang. "
 
-                    "Do not label the questions or answers in the response. "
                     "Do not include HTML in the response. "
+                    "Return ONLY valid JSON, no additional text or explanations. "
 
                     "REQUEST: Generate a verbose and comprehensive list of flashcards about " + input_text + "?"
                     }]}],
                     "generationConfig": {
-                    "response_mime_type": "text/plain"
+                    "response_mime_type": "application/json"
                 }
             }
 
