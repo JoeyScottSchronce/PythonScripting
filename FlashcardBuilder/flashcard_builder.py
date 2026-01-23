@@ -24,9 +24,9 @@ COLOR_TEXT_PRIMARY = '#E0E0E0'
 COLOR_TEXT_SECONDARY = 'white'
 
 # Window settings
-WINDOW_WIDTH = 900
+WINDOW_WIDTH = 600
 WINDOW_HEIGHT = 500
-CANVAS_WIDTH = 880
+CANVAS_WIDTH = 480
 CANVAS_HEIGHT = 480
 
 # Fonts
@@ -474,54 +474,60 @@ class FlashcardApp:
 
     def _create_flashcard_row(self, parent, card, index):
         """
-        Create a single flashcard edit row.
+        Create a single flashcard edit row with question above answer.
+        Checkbox positioned on the left side.
         
         Args:
             parent (tk.Frame): Parent frame
             card (dict): Flashcard data
             index (int): Row index
         """
-        row_frame = tk.Frame(parent, bg=COLOR_BG_PRIMARY)
-        row_frame.pack(pady=2, anchor='center')
+        # Outer container
+        outer_frame = tk.Frame(parent, bg=COLOR_BG_PRIMARY)
+        outer_frame.pack(pady=PADDING_STANDARD, anchor='w', fill='x', padx=PADDING_STANDARD)
 
-        # Checkbox
+        # Main content frame (checkbox + Q&A fields)
+        content_frame = tk.Frame(outer_frame, bg=COLOR_BG_PRIMARY)
+        content_frame.pack(anchor='w', fill='x')
+
+        # Checkbox on the left
         var = tk.BooleanVar(value=True)
         self.check_vars.append(var)
-        tk.Checkbutton(row_frame,
-                      variable=var,
-                      bg=COLOR_BG_PRIMARY,
-                      fg=COLOR_TEXT_SECONDARY,
-                      selectcolor=COLOR_BG_SECONDARY).pack(side='left',
-                                                           padx=PADDING_STANDARD)
+        checkbox = tk.Checkbutton(content_frame,
+                                 variable=var,
+                                 bg=COLOR_BG_PRIMARY,
+                                 fg=COLOR_TEXT_SECONDARY,
+                                 selectcolor=COLOR_BG_SECONDARY)
+        checkbox.pack(side='left', padx=(0, PADDING_STANDARD))
 
-        # Question field
-        tk.Label(row_frame,
-                text="Q:",
-                fg=COLOR_TEXT_PRIMARY,
-                bg=COLOR_BG_PRIMARY).pack(side='left', padx=PADDING_STANDARD)
-        
-        q_entry = tk.Entry(row_frame,
+        # Right side: Question and Answer fields
+        fields_frame = tk.Frame(content_frame, bg=COLOR_BG_PRIMARY)
+        fields_frame.pack(side='left', fill='x', expand=True)
+
+        # Question row
+        q_row = tk.Frame(fields_frame, bg=COLOR_BG_PRIMARY)
+        q_row.pack(anchor='w', fill='x', pady=(0, PADDING_STANDARD))
+
+        q_entry = tk.Entry(q_row,
                           width=ENTRY_WIDTH_QUESTION,
                           bg=COLOR_BG_SECONDARY,
                           fg=COLOR_TEXT_SECONDARY,
                           insertbackground=COLOR_TEXT_SECONDARY)
         q_entry.insert(0, card['question'])
-        q_entry.pack(side='left', padx=PADDING_STANDARD)
+        q_entry.pack(side='left', fill='x', expand=True)
         self.question_entries.append(q_entry)
 
-        # Answer field
-        tk.Label(row_frame,
-                text="A:",
-                fg=COLOR_TEXT_PRIMARY,
-                bg=COLOR_BG_PRIMARY).pack(side='left', padx=PADDING_STANDARD)
-        
-        a_entry = tk.Entry(row_frame,
+        # Answer row
+        a_row = tk.Frame(fields_frame, bg=COLOR_BG_PRIMARY)
+        a_row.pack(anchor='w', fill='x')
+
+        a_entry = tk.Entry(a_row,
                           width=ENTRY_WIDTH_ANSWER,
                           bg=COLOR_BG_SECONDARY,
                           fg=COLOR_TEXT_SECONDARY,
                           insertbackground=COLOR_TEXT_SECONDARY)
         a_entry.insert(0, card['answer'])
-        a_entry.pack(side='left', padx=PADDING_STANDARD)
+        a_entry.pack(side='left', fill='x', expand=True)
         self.answer_entries.append(a_entry)
 
     def _on_mousewheel(self, event):
