@@ -173,13 +173,13 @@ class FlashcardApp:
         "{\"question\": \"What is 2+2?\", \"answer\": \"4\"}]\n\n"
         "REQUIREMENTS:\n"
         "- Always format response as valid JSON only (no additional text)\n"
+        "- For programming topics, always use the Official Documentation and Manual pages to generate content\n"
         "- Use simple, clear language\n"
         "- Cover the topic comprehensively\n"
-        "- Generate as many flashcards as possible\n"
-        "- Questions should be phrased as if asking someone\n"
-        "- Answers must be extremely brief and memorable\n"
-        "- For programming topics, use Golang as the preferred language\n"
-        "- Do not include HTML in the response\n"
+        "- Generate as many flashcards as possible to fully teach the topic, from novice to expert level\n"
+        "- All Questions should be phrased as if asking yourself for advice\n"
+        "- Answers must be extremely brief and rememberable\n"
+        "- Do NOT include HTML in the response\n"
     )
     
     def __init__(self, root):
