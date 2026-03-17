@@ -24,7 +24,7 @@ COLOR_TEXT_PRIMARY = '#E0E0E0'
 COLOR_TEXT_SECONDARY = 'white'
 
 # Window settings
-WINDOW_WIDTH = 600
+WINDOW_WIDTH = 950
 WINDOW_HEIGHT = 500
 CANVAS_WIDTH = 480
 CANVAS_HEIGHT = 480
@@ -172,6 +172,7 @@ class FlashcardApp:
         "Example: [{\"question\": \"Where is Rome?\", \"answer\": \"Italy\"}, "
         "{\"question\": \"What is 2+2?\", \"answer\": \"4\"}]\n\n"
         "REQUIREMENTS:\n"
+        "- If the REQUEST contains /testing/ in it, only create one card where the front says 'testing' and the back says '123'. "
         "- Always format response as valid JSON only (no additional text)\n"
         "- For programming topics, always use the Official Documentation and Manual pages to generate content\n"
         "- Use simple, clear language\n"
