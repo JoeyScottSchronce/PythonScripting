@@ -178,7 +178,7 @@ class FlashcardApp:
         "- Use simple, clear language\n"
         "- Cover the topic comprehensively\n"
         "- Generate as many flashcards as possible to fully teach the topic, from novice to expert level\n"
-        "- All Questions should be phrased as if asking yourself for advice\n"
+        "- All Questions should be phrased as if asking yourself for advice unless explicitly stated otherwise with an example of the front and back of the card (e.g., front: back, front: back, etc.)\n"
         "- Answers must be extremely brief and rememberable\n"
         "- Do NOT include HTML in the response\n"
     )
