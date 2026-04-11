@@ -4,3 +4,4 @@
 .idea/
 .pytest*
 __pycache__
+.cursor
