@@ -14,8 +14,8 @@ root.title("Image Converter")
 root.configure(bg="#2B2B2B")  # Dark gray background
 
 # Set window size and position near the top-right corner
-window_width = 300
-window_height = 200
+window_width = 400
+window_height = 300
 offset = 50
 screen_width = root.winfo_screenwidth()
 screen_height = root.winfo_screenheight()
